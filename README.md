@@ -13,3 +13,7 @@ In the postman hit the restapi with the security code in the header.
 
 It could be explained through the figure below(SEARCHAPI).
 ![github-large](https://github.com/anwesha999/SearchEngine/blob/master/searchApi.PNG)
+
+
+To understand the theory behind the working of the project have a look at:
+![github-large](https://github.com/anwesha999/SearchEngine/blob/master/report-endterm.pdf)
