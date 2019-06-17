@@ -1,0 +1,224 @@
+<html lang="en">
+
+<head title="Secure Trace Job Portal">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function submitvalue() {
+            let rs = document.getElementById("requiredSkills").value;
+            let ps = document.getElementById("preferredSkills").value;
+            let exp = document.getElementById("minimumYearsOfExp").value;
+            let candId = document.getElementById("candidateId").value;
+            let transId = document.getElementById("transactionId").value;
+            let offset = $('#offset1').val();
+            let size = $('#size1').val();
+
+            let url = "http://localhost:3002/search/?rs=" + rs + "&ps=" + ps + "&mye=" + exp + "&candId=" + candId + "&transId=" + transId + "&offset=" + offset + "&size=" + size
+            console.log(url)
+            $('#resultTable').empty();
+            $.ajax({
+                url: url,
+                headers: {
+                    'Token': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik9UQTFNelpFTTBRd1JqRkZSalpDUVVFMk5qTXpORU5CTlVVMlJqZzVNak5CTWtReU9UZzFPQSJ9.eyJpc3MiOiJodHRwczovLzl6ZXN0YXBwLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1YzUwNGFlYzVkMzczZDA4ODcwYjUwNWEiLCJhdWQiOlsiaHR0cHM6Ly9kZXZhcGkuOXplc3QuY29tL3Ryb3VibGVzaG9vdCIsImh0dHBzOi8vOXplc3RhcHAuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU1MTM0ODU2OSwiZXhwIjoxNTUxMzUyMTY5LCJhenAiOiJxMlZZR2ltdVpXTjd0N1M0dHBGR0xKSERhS1JLNlRycSIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgYWRkcmVzcyBwaG9uZSBvZmZsaW5lX2FjY2VzcyIsImd0eSI6InBhc3N3b3JkIn0.ESjS7cOVoGPLXE7q5_HdOAYwm948qa6w4P3mQF-ZbBIzQw0Mb1fLkLpf4PXmkWe1PzU6Wrs29Y5bN9udux5kMQXf7mTa_GDcrA0r6_6J7cIIZjkzJgnHmFNlKW9QVjPjRGQ5kKZuTSYaJ3BB-90lVbAcEgW-XPy4uqhLfqsW2Wn8x6fKm7aoXHv0dy0qzVTxhcOrvZB4f9DrmUnrrnaFGPVIPpZgUBTvOGjLDYAkN09mgwbQgB2qolasE_ltugrKEcjRQ5TQc4gTDgwfa2NnJ_s9Z5JibMoG89yhljomHzWTuXJ-eA7Ca0lLhM61VPf7vOpj3PELbihSmFKSvFyB6w'
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let dataToAppend = "";
+                    console.log(data.matches.length)
+                    for (var i = 0; i < data.matches.length; i++) {
+
+                        let skillsToAppend = " ";
+
+                        for (var j = 0; j < data.matches[i].skill.length; j++) {
+                            skillsToAppend += data.matches[i].skill[j]+"</br>";
+                        }
+                        skillsToAppend += " ";
+
+                        dataToAppend += "<tr><td>" + data.matches[i].candidate_id + "</td><td>"
+                            + data.matches[i].candidate_name + "</td><td>"
+                            + data.matches[i].candidate_trans_id + "</td><td>"
+                            + data.matches[i].candidate_location + "</td><td>"
+                            + data.matches[i].workExperience + "</td><td>"
+                            + skillsToAppend + "</td><td>"
+                            + data.matches[i].matchPercentage + "</td></tr>";
+                        console.log(skillsToAppend);
+                    }
+                    console.log(dataToAppend)
+                    $('#resultTable').append("<tr><th>Candidate Id</th>" +
+                        "<th>Candidate Name</th>" +
+                        "<th>Transaction Id</th>" +
+                        "<th>Candidate Location</th>" +
+                        "<th>Work Experience</th>" +
+                        "<th>Skill</th>" +
+                        "<th>Preferred Skill Match Percentage</th>" +
+                        "</tr>");
+                    $('#resultTable').append(dataToAppend);
+                }
+            });
+        }
+
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: #384047;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 5px auto;
+            padding: 5px 10px;
+            background: #f4f7f8;
+            border-radius: 3px;
+        }
+
+        h1 {
+            margin: 0 0 5px 0;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="datetime"],
+        input[type="email"],
+        input[type="number"],
+        input[type="search"],
+        input[type="tel"],
+        input[type="time"],
+        input[type="url"],
+        textarea,
+        select {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            font-size: 16px;
+            height: auto;
+            margin: 0;
+            outline: 0;
+            padding: 5px;
+            width: 100%;
+            background-color: #e8eeef;
+            color: #8a97a0;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+            margin-bottom: 10px;
+        }
+
+        fieldset {
+            margin-bottom: 0px;
+            border: none;
+        }
+
+        legend {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 20px;
+            font-family: georgian;
+            margin-bottom: 0px;
+        }
+
+        label.light {
+            font-weight: 300;
+            display: inline;
+        }
+
+
+        @media screen and (min-width: 480px) {
+
+            form {
+                max-width: 550px;
+            }
+
+        }
+
+        #resultTable {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #resultTable td,
+        #resultTable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #resultTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #resultTable tr:hover {
+            background-color: #ddd;
+        }
+
+        #resultTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #8a97a0;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <h1>Job portal</h1>
+    <div
+        style="max-width:550px;margin: 5px auto;  padding: 5px 10px;  background: #f4f7f8;  border-radius: 3px;opacity:0.9">
+        <fieldset>
+
+            <label for="requiredSkills"> Enter the required skills: </label>
+            <input type="text" id="requiredSkills" />
+
+            <label for="preferredSkills">Enter the preferred skills:</label>
+            <input type="text" id="preferredSkills" />
+
+            <label for="minimumYearsOfExp">Enter the minimum years of Experience: </label>
+            <input type="number" id="minimumYearsOfExp" />
+
+            <label for="candidateId">Enter the candidate Id: </label>
+            <input type="number" id="candidateId" />
+            
+            <label for="transactionId">Enter the transaction Id: </label>
+            <input type="number" id="transactionId" />
+
+            <label for="offset">Offset</label>
+            <input type="number" id="offset1" />
+
+            <label for="size">Size</label>
+            <input type="number" id="size1" />
+            
+            <div style="text-align:center">
+                <input
+                    style="color:#FFF ; background-color:#8a97a0 ; font-size:18px ; border-width:1px 1px 3px; border: 1px solid #8a97a0 ; border-radius: 5px"
+                    type="submit" value="Search" onclick="submitvalue()" /></br>
+            </div>
+            <div>
+                <br>
+                <table class="table table-responsive"
+                    style="'text-align':'center';border:'1px solid black'; background-color:#808080" id="resultTable">
+                    <tr>
+                        <th>Candidate Id</th>
+                        <th>Candidate Name</th>
+                        <th>Transaction Id</th>
+                        <th>Candidate Location</th>
+                        <th>Work Experience</th>
+                        <!--                 <th>Skills</th>-->
+                        <th>Match Percentage</th>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+
+    </div>
+
+</body>
+
+</html>
