@@ -11,4 +11,5 @@ node server.js
 In the background run elasticsearch
 In the postman hit the restapi with the security code in the header.
 
-searchApi.png shows the restAPI for the same.
+It could be explained through the figure below(SEARCHAPI).
+![github-large](https://github.com/anwesha999/SearchEngine/blob/master/searchApi.PNG)
