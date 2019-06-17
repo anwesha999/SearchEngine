@@ -16,4 +16,4 @@ It could be explained through the figure below(SEARCHAPI).
 
 
 To understand the theory behind the working of the project have a look at:
-![github-large](https://github.com/anwesha999/SearchEngine/blob/master/report-endterm.pdf)
+Pdf file attached in this repository.
