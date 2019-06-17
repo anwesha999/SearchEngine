@@ -2,7 +2,7 @@
 SearchEngine Using ElasticSearch on Parser
 
 # To run the code dependencies involved
-npm install ---all
+npm install ---save
 download & run elasticsearch(5.2.2) through bin folder
 
 # To run the code
