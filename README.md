@@ -18,10 +18,10 @@ It could be explained through the figure below(SEARCHAPI).
 To understand the theory behind the working of the project have a look at:
 Pdf file attached in this repository.
 
-Basically the 3 major APIs used are as:
-INDEX API:
+# Basically the 3 major APIs used are as:
+# INDEX API:
 ![github-large](https://github.com/anwesha999/SearchEngine/blob/master/indexQuery.PNG)
-UPDATE API:
+# UPDATE API:
 ![github-large](https://github.com/anwesha999/SearchEngine/blob/master/update_query.PNG)
-SEARCH API:
+# SEARCH API:
 ![github-large](https://github.com/anwesha999/SearchEngine/blob/master/searchQuery.PNG)
